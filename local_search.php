@@ -35,7 +35,8 @@ if (!$link) {
 }
 mysql_select_db('haiku_archive')or die("cannot select db");
 $string = $_POST['keywords'];
-$search_query =    "SELECT haiku_text, date_written FROM archive_2000 WHERE haiku_text LIKE '%$string%' UNION
+$search_query =    "SELECT haiku_text, date_written FROM archive_1999 WHERE haiku_text LIKE '%$string%' UNION
+                    SELECT haiku_text, date_written FROM archive_2000 WHERE haiku_text LIKE '%$string%' UNION
                     SELECT haiku_text, date_written FROM archive_2001 WHERE haiku_text LIKE '%$string%' UNION
                     SELECT haiku_text, date_written FROM archive_2002 WHERE haiku_text LIKE '%$string%' UNION
                     SELECT haiku_text, date_written FROM archive_2003 WHERE haiku_text LIKE '%$string%' UNION
