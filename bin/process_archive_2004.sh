@@ -1,6 +1,5 @@
 #!/bin/bash
 
-cp /dev/null >  ~/git/haiku_search/data/archive_2004.html
 ./drop_table_2004.rb
 for i in `ls -1 ~/git/haiku_search/data/archive_2004/[0-9]???.html`
 do
