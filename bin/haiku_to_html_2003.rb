@@ -12,7 +12,7 @@ begin
 
     n_rows.times do
         begin
-            file = File.open("~/git/haiku_search/data/archive_2003.html", "a")
+            file = File.open("~/git/haiku_search/data/archive_2003.html", "w")
             line = rs.fetch_row.to_s
             line.gsub!(/[\[\]",]/, '')
             file.write(line)
