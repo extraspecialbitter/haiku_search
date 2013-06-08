@@ -13,5 +13,4 @@ do
   sed  '/^________________________/,$d' snippet.txt > qwert.txt
   ./insert_haiku_from_file_into_table_1999.rb qwert.txt
 done
-./haiku_to_html_1999.rb
 rm -rf snippet.txt qwert.txt
