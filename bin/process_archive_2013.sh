@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ./drop_table_2013.rb
-for i in `ls -1 ~/git/haiku_search/data/archive/[0-9]???.html`
+for i in `ls -1 ~/git/haiku_search/data/archive_2013/[0-9]???.html`
 do
   ./extract_haiku_2013.rb ${i}
   sed  '/^Received\ on/,$d' snippet.txt > qwert.txt
