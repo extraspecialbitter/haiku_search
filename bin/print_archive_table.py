@@ -33,7 +33,8 @@ cursor = db.cursor()
 cursor.execute("SELECT * FROM %s" % table_name)
 
 # count the rows
-print cursor.rowcount
+n_rows = cursor.rowcount
+print "There are %s rows in the result set" %n_rows
     
 # disconnect from server
 db.close()
