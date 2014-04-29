@@ -21,9 +21,7 @@ if int(year_string) < 1999 or int(year_string) > 2014:
     print "Year must be between 1999 and 2014\n"
     sys.exit(1)    
 
-# table_name = "archive_" + year_string
-table_name = "archive_" + "test"
-print "table name: %s" %table_name
+table_name = "archive_" + year_string
 
 # Open database connection
 db = MySQLdb.connect("localhost","root","menagerie","haiku_archive" )
@@ -32,7 +30,7 @@ db = MySQLdb.connect("localhost","root","menagerie","haiku_archive" )
 cursor = db.cursor()
 
 # Drop table if it already exist using execute() method.
-cursor.execute("DROP TABLE IF EXISTS archive_test")
+cursor.execute("DROP TABLE IF EXISTS %s" % table_name)
 
 # disconnect from server
 db.close()
