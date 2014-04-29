@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./drop_table_2014.rb
+./drop_haiku_archive_table.py 2014
 for i in `ls -1 ~/git/haiku_search/data/archive/[0-9]???.html`
 do
   ./extract_haiku_2014.rb ${i}
