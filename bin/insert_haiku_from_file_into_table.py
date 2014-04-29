@@ -26,20 +26,24 @@ table_name = "archive_" + year_string
 file_name = sys.argv[2]
 
 # Open database connection
-# db = MySQLdb.connect("localhost","root","menagerie","haiku_archive" )
+db = MySQLdb.connect("localhost","root","menagerie","haiku_archive" )
 
 # prepare a cursor object using cursor() method
-# cursor = db.cursor()
+cursor = db.cursor()
 
 # Create table using execute() method.
 
-# sql = """CREATE TABLE IF NOT EXISTS %s" % table_name)
-#        haiku_text VARCHAR(120),
-#        date_written CHAR(22))"""
+# cursor.execute ("CREATE TABLE IF NOT EXISTS %s" % table_name (
+#      haiku_text VARCHAR(120),
+#      date_written CHAR(22)))
 
-# cursor.execute(sql)
+# Open the file for processing
+fh = open("%s" %file_name, "r")
+print "Name of the file: ", fh.name
+print "Closed or not : ", fh.closed
+print "Opening mode : ", fh.mode
+print "Softspace flag : ", fh.softspace
 
-#     fh = File.open(ARGV[0])
 #     @date_row = true
 #     @haiku_text = ""
 #     @date_written = "<i>"
