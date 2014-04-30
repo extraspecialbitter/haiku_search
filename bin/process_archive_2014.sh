@@ -7,4 +7,4 @@ do
   sed  '/^Received\ on/,$d' snippet.txt > qwert.txt
   ./insert_haiku_from_file_into_table_2014.rb qwert.txt
 done
-rm -rf snippet.txt qwert.txt
+# rm -rf snippet.txt qwert.txt
