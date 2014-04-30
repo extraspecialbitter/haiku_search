@@ -2,6 +2,7 @@
 
 from sys import argv
 import MySQLdb, sys, time
+import fileinput
 
 # Validate Argument
 
@@ -47,14 +48,15 @@ print "Closed or not : ", fh.closed
 print "Opening mode : ", fh.mode
 print "Softspace flag : ", fh.softspace
 
-#     @date_row = true
-#     @haiku_text = ""
-#     @date_written = "<i>"
+date_row = 1
+haiku_text = ""
+date_written = "<i>"
 
 # remove blank lines from file
 
-#     while( !fh.eof)
-#         line = fh.readline.chomp
+for line in fileinput.FileInput("file",inplace=1):
+    if line.rstrip():
+        print line
 # remove leading and trailing blanks
 #         line.strip!
 # skip empty lines
