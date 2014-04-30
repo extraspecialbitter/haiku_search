@@ -38,15 +38,15 @@ sql = "CREATE TABLE IF NOT EXISTS " + table_name  + """
          haiku_text VARCHAR(120), 
          date_written CHAR(22))"""
 
-print sql
+# print sql
 # cursor.execute(sql)
 
 # Open the file for processing
 fh = open("%s" %file_name, "r")
-print "Name of the file: ", fh.name
-print "Closed or not : ", fh.closed
-print "Opening mode : ", fh.mode
-print "Softspace flag : ", fh.softspace
+# print "Name of the file: ", fh.name
+# print "Closed or not : ", fh.closed
+# print "Opening mode : ", fh.mode
+# print "Softspace flag : ", fh.softspace
 
 date_row = 1
 haiku_text = ""
@@ -54,15 +54,12 @@ date_written = "<i>"
 
 # remove blank lines from file
 
-for line in fileinput.FileInput("file",inplace=1):
-    if line.rstrip():
-        print line
+for line in fileinput.FileInput("%s" %file_name,inplace=1):
+    line.rstrip()
+
 # remove leading and trailing blanks
-#         line.strip!
-# skip empty lines
-#         next if line == ''
-# convert tab chars to blanks
-#         line.gsub!(/\t/,' ')
+    line.strip()
+
 # convert apostrophe char to HTML code
 #         line.gsub!(/'/,'&#8217;')
 # substitute a single blank for a sequence of blanks
