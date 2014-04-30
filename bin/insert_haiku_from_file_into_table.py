@@ -33,10 +33,12 @@ cursor = db.cursor()
 
 # Create table using execute() method.
 
-sql = """CREATE TABLE IF NOT EXISTS ?
-      haiku_text VARCHAR(120), 
-      date_written CHAR(22))""" 
-cursor.execute(sql, table_name)
+sql = "CREATE TABLE IF NOT EXISTS " + table_name  + """
+         haiku_text VARCHAR(120), 
+         date_written CHAR(22))"""
+
+print sql
+# cursor.execute(sql)
 
 # Open the file for processing
 fh = open("%s" %file_name, "r")
