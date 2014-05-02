@@ -55,10 +55,12 @@ date_written = "<i>"
 # remove blank lines from file
 
 for line in fileinput.FileInput("%s" %file_name,inplace=1):
-    line.rstrip()
+    newline = line.rstrip()
 
 # remove leading and trailing blanks
-    line.strip()
+    newline = line.strip()
+
+    print newline
 
 # convert apostrophe char to HTML code
 #         line.gsub!(/'/,'&#8217;')
