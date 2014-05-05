@@ -63,11 +63,11 @@ for line in open("%s" %file_name, "r"):
   if line: # is not empty
     newline = line
     
-# convert apostrophe (and others) to HTML code
-    newline = cgi.escape(newline,quote=True)
+# convert apostrophe and double-quote to HTML code
+    newline = newline.replace("'", r"&#8217;")
+    newline = newline.replace("\"", r"&quot;")
     print(newline)
-# substitute a single blank for a sequence of blanks
-#         line.squeeze!(' ')
+
 # insert line into table
 #         if @date_row == true
 #            @date_written << line
