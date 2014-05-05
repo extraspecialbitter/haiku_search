@@ -42,7 +42,7 @@ sql = "CREATE TABLE IF NOT EXISTS " + table_name  + """
 # cursor.execute(sql)
 
 # Open the file for processing
-fh = open("%s" %file_name, "r")
+# fh = open("%s" %file_name, "r")
 # print "Name of the file: ", fh.name
 # print "Closed or not : ", fh.closed
 # print "Opening mode : ", fh.mode
@@ -52,15 +52,17 @@ date_row = 1
 haiku_text = ""
 date_written = "<i>"
 
-# remove blank lines from file
+# remove blank lines and leading and trailing blanks from file
 
-for line in fileinput.FileInput("%s" %file_name,inplace=1):
-    newline = line.rstrip()
-
-# remove leading and trailing blanks
-    newline = line.strip()
-
-    print newline
+for line in open("%s" %file_name, "r"):
+  line = line.rstrip()
+  if line != '':
+    newline = line
+  line = line.strip()
+  if line: # is not empty
+    newline = line
+    print(newline)
+    
 
 # convert apostrophe char to HTML code
 #         line.gsub!(/'/,'&#8217;')
