@@ -3,6 +3,7 @@
 from sys import argv
 import MySQLdb, sys, time
 import fileinput
+import html
 
 # Validate Argument
 
@@ -61,11 +62,10 @@ for line in open("%s" %file_name, "r"):
   line = line.strip()
   if line: # is not empty
     newline = line
-    print(newline)
     
-
-# convert apostrophe char to HTML code
-#         line.gsub!(/'/,'&#8217;')
+# convert apostrophe (and others) to HTML code
+    newline = html.escape(newline,quote=True)
+    print(newline)
 # substitute a single blank for a sequence of blanks
 #         line.squeeze!(' ')
 # insert line into table
