@@ -3,7 +3,7 @@
 from sys import argv
 import MySQLdb, sys, time
 import fileinput
-import html
+import cgi
 
 # Validate Argument
 
@@ -64,7 +64,7 @@ for line in open("%s" %file_name, "r"):
     newline = line
     
 # convert apostrophe (and others) to HTML code
-    newline = html.escape(newline,quote=True)
+    newline = cgi.escape(newline,quote=True)
     print(newline)
 # substitute a single blank for a sequence of blanks
 #         line.squeeze!(' ')
