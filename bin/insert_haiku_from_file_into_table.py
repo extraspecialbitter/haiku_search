@@ -23,7 +23,8 @@ if int(year_string) < 1999 or int(year_string) > 2014:
     print "Year must be between 1999 and 2014\n"
     sys.exit(1)    
 
-table_name = "archive_" + year_string
+# table_name = "archive_" + year_string
+table_name = "archive_test" 
 
 file_name = sys.argv[2]
 
@@ -36,11 +37,11 @@ cursor = db.cursor()
 # Create table using execute() method.
 
 sql = "CREATE TABLE IF NOT EXISTS " + table_name  + """
-         haiku_text VARCHAR(120), 
+         (haiku_text VARCHAR(120), 
          date_written CHAR(22))"""
 
-# print sql
-# cursor.execute(sql)
+print sql
+cursor.execute(sql)
 
 # Open the file for processing
 # fh = open("%s" %file_name, "r")
