@@ -40,15 +40,7 @@ sql = "CREATE TABLE IF NOT EXISTS " + table_name  + """
          (haiku_text VARCHAR(120), 
          date_written CHAR(22))"""
 
-print sql
 cursor.execute(sql)
-
-# Open the file for processing
-# fh = open("%s" %file_name, "r")
-# print "Name of the file: ", fh.name
-# print "Closed or not : ", fh.closed
-# print "Opening mode : ", fh.mode
-# print "Softspace flag : ", fh.softspace
 
 date_row = True
 haiku_text = ""
@@ -76,13 +68,14 @@ for line in open("%s" %file_name, "r"):
     else:
         haiku_text = haiku_text + newline + "<br>"
 
-print "%s" %date_written
 print "%s" %haiku_text
+print "%s" %date_written
 
-#   puts @haiku_text
-#   puts @date_written
-#    con.query("INSERT archive_2012(haiku_text, date_written) \
-#       VALUES('#{@haiku_text}', '#{@date_written}')")
+sql = "INSERT into " + table_name + """
+      (haiku_text, date_written) VALUES (%s, %s), haiku_text, date_written"""
+print sql
+cursor.execute(sql)
+
 #   fh.close
 #   exit(0)
 
