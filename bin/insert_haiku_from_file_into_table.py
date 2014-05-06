@@ -71,17 +71,14 @@ for line in open("%s" %file_name, "r"):
 
 # insert line into table
     if date_row:
-        date_string = line.join(date_list)
-        print "%s" %date_string
+        date_written = newline.join(date_list)
         date_row = False
-#   else:
-#       haiku_string = line.join(line)
-#       print "%s" %haiku_string
+    else:
+        haiku_text = haiku_text + newline + "<br>"
 
-#            @haiku_text << line 
-#            @haiku_text << '<br>' 
-#         end
-#   end
+print "%s" %date_written
+print "%s" %haiku_text
+
 #   puts @haiku_text
 #   puts @date_written
 #    con.query("INSERT archive_2012(haiku_text, date_written) \
