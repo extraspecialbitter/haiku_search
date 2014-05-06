@@ -50,9 +50,9 @@ cursor.execute(sql)
 # print "Opening mode : ", fh.mode
 # print "Softspace flag : ", fh.softspace
 
-date_row = 1
+date_row = True
 haiku_text = ""
-date_written = "<i>"
+date_list = ["<i>", "</i><br>"]
 
 # remove blank lines and leading and trailing blanks from file
 
@@ -70,11 +70,14 @@ for line in open("%s" %file_name, "r"):
     print(newline)
 
 # insert line into table
-#         if @date_row == true
-#            @date_written << line
-#            @date_written << '</i><br>'
-#            @date_row = false
-#         else
+    if date_row:
+        date_string = line.join(date_list)
+        print "%s" %date_string
+        date_row = False
+#   else:
+#       haiku_string = line.join(line)
+#       print "%s" %haiku_string
+
 #            @haiku_text << line 
 #            @haiku_text << '<br>' 
 #         end
