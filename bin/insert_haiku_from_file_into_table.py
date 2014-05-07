@@ -71,8 +71,9 @@ for line in open("%s" %file_name, "r"):
 print "%s" %haiku_text
 print "%s" %date_written
 
-sql = "INSERT into " + table_name + """
-      (haiku_text, date_written) VALUES (%s, %s), haiku_text, date_written"""
+sql  = "INSERT into " + table_name + "(haiku_text, date_written) "
+sql += "VALUES(haiku_text, date_written)"
+
 print sql
 cursor.execute(sql)
 
