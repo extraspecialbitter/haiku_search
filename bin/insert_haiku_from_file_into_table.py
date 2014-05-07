@@ -71,12 +71,18 @@ for line in open("%s" %file_name, "r"):
 print "%s" %haiku_text
 print "%s" %date_written
 
-# prepare a cursor object using cursor() method
-cursor = db.cursor()
+# SQL query to INSERT a haiku into the selected table 
+cursor.execute('INSERT into ' + table_name + '(haiku_text, date_written) values (%s, %s)', (haiku_text, date_written))
 
-sql  = "INSERT INTO " + table_name + "(haiku_text, date_written) "
-sql += "VALUES(%s, %s), haiku_text, date_written"
+# Commit your changes in the database
+db.commit()
 
-print sql
-cursor.execute(sql)
+# disconnect from server
+db.close()
+
+# sql  = "INSERT INTO " + table_name + "(haiku_text, date_written) "
+# sql += "VALUES(%s, %s), haiku_text, date_written"
+
+# print sql
+# cursor.execute(sql)
 
