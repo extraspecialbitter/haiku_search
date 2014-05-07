@@ -71,19 +71,12 @@ for line in open("%s" %file_name, "r"):
 print "%s" %haiku_text
 print "%s" %date_written
 
-sql  = "INSERT into " + table_name + "(haiku_text, date_written) "
+# prepare a cursor object using cursor() method
+cursor = db.cursor()
+
+sql  = "INSERT INTO " + table_name + "(haiku_text, date_written) "
 sql += "VALUES(haiku_text, date_written)"
 
 print sql
 cursor.execute(sql)
 
-#   fh.close
-#   exit(0)
-
-# rescue Mysql::Error => e
-#   puts e.errno
-#   puts e.error
-    
-# ensure
-#   con.close if con
-# end
