@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 from sys import argv
+from warnings import filterwarnings
 import MySQLdb, sys, time
 import fileinput
 import cgi
@@ -27,6 +28,9 @@ table_name = "archive_" + year_string
 # table_name = "archive_test" 
 
 file_name = sys.argv[2]
+
+# filter MySQL warnings
+filterwarnings('ignore', category = MySQLdb.Warning)
 
 # Open database connection
 db = MySQLdb.connect("localhost","root","menagerie","haiku_archive" )
