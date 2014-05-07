@@ -23,8 +23,8 @@ if int(year_string) < 1999 or int(year_string) > 2014:
     print "Year must be between 1999 and 2014\n"
     sys.exit(1)    
 
-# table_name = "archive_" + year_string
-table_name = "archive_test" 
+table_name = "archive_" + year_string
+# table_name = "archive_test" 
 
 file_name = sys.argv[2]
 
@@ -59,7 +59,7 @@ for line in open("%s" %file_name, "r"):
 # convert apostrophe and double-quote to HTML code
     newline = newline.replace("'", r"&#8217;")
     newline = newline.replace("\"", r"&quot;")
-    print(newline)
+#   print(newline)
 
 # insert line into table
     if date_row:
@@ -68,8 +68,8 @@ for line in open("%s" %file_name, "r"):
     else:
         haiku_text = haiku_text + newline + "<br>"
 
-print "%s" %haiku_text
-print "%s" %date_written
+# print "%s" %haiku_text
+# print "%s" %date_written
 
 # SQL query to INSERT a haiku into the selected table 
 cursor.execute('INSERT into ' + table_name + '(haiku_text, date_written) values (%s, %s)', (haiku_text, date_written))
@@ -79,10 +79,4 @@ db.commit()
 
 # disconnect from server
 db.close()
-
-# sql  = "INSERT INTO " + table_name + "(haiku_text, date_written) "
-# sql += "VALUES(%s, %s), haiku_text, date_written"
-
-# print sql
-# cursor.execute(sql)
 
