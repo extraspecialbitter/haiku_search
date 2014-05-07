@@ -75,7 +75,7 @@ print "%s" %date_written
 cursor = db.cursor()
 
 sql  = "INSERT INTO " + table_name + "(haiku_text, date_written) "
-sql += "VALUES(haiku_text, date_written)"
+sql += "VALUES(%s, %s), haiku_text, date_written"
 
 print sql
 cursor.execute(sql)
