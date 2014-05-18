@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# see if there's anything new
+rsync -latv --delete mena@sasi.pair.com:/usr/www/users/mena/haikupoet/new_haiku/ /home/pablo/git/haiku_search/data/new_haiku/
+
 # ./drop_haiku_archive_table.py 2014
 for i in `ls -1 ~/git/haiku_search/data/new_haiku/[0-9]???.html`
 do
