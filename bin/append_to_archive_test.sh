@@ -8,4 +8,8 @@ do
 # ./insert_haiku_from_file_into_table_2014.rb qwert.txt
   ./insert_haiku_from_file_into_test_table.py qwert.txt
 done
-# rm -rf snippet.txt qwert.txt
+
+# cleanup
+rm -rf snippet.txt qwert.txt
+ssh mena@sasi.pair.com "cat /dev/null > /usr/home/mena/mail/new_haiku"
+ssh mena@sasi.pair.com "rm -f /usr/www/users/mena/haikupoet/new_haiku/*"
