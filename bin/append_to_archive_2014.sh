@@ -9,6 +9,7 @@ if [ -e /home/pablo/git/haiku_search/data/new_haiku/0000.html ]
 
 then 
   for i in `ls -1 ~/git/haiku_search/data/new_haiku/[0-9]???.html`
+  cd /home/pablo/git/haiku_search/bin
   do
     ./extract_haiku_2014.rb ${i}
     sed  '/^Received\ on/,$d' snippet.txt > qwert.txt
