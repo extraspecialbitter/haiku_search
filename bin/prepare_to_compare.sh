@@ -10,4 +10,4 @@ echo "grabbing the last MySQL dump"
 scp www.extraspecialbitter.com:~/tmp/archive_2014.sql ~/tmp
 
 echo "sourcing the MySQL dump locally"
-mysql -e "source ~/tmp/archive_2014.sql" haiku_archive
+mysql -u root -p -e "source ~/tmp/archive_2014.sql" haiku_archive
