@@ -34,8 +34,8 @@ if (!$link) {
     die('Could not connect: ' . mysql_error());
 }
 mysql_select_db('haiku_archive')or die("cannot select db");
-$string = $_POST['keywords'];
-$search_query =    "SELECT * FROM archive_2014 WHERE haiku_text NOT IN (SELECT haiku_text FROM archive_2014_from_html";
+
+$search_query = "SELECT * FROM archive_2014 WHERE haiku_text NOT IN (SELECT haiku_text FROM archive_2014_from_html)";
 
 $result = mysql_query($search_query,$link);
 
@@ -44,15 +44,35 @@ if ($rows == 0) {
     echo "sorry, no match for this query.";
     }
     $count = 0;
-    echo "haiku in original archive but not in archive generated from html";
+    echo "haiku in original archive but not in archive generated from html:";
+    echo "\n\n\n";
     while ($count < $rows) {
         while($row = mysql_fetch_assoc($result)) {
             echo "{$row['haiku_text']} {$row['date_written']}";
-            echo "\n\n";
+            echo "\n";
         }
         $count = $count + 1;
     }
 
+$search_query = "SELECT * FROM archive_2014_from_html WHERE haiku_text NOT IN (SELECT haiku_text FROM archive_2014)";
+
+$result = mysql_query($search_query,$link);
+
+$rows = mysql_num_rows($result);
+if ($rows == 0) {
+    echo "sorry, no match for this query.";
+    }
+    $count = 0;
+    echo "\n";
+    echo "haiku in archive generated from html but not in original:";
+    echo "\n\n\n";
+    while ($count < $rows) {
+        while($row = mysql_fetch_assoc($result)) {
+            echo "{$row['haiku_text']} {$row['date_written']}";
+            echo "\n";
+        }
+        $count = $count + 1;
+    }
 mysql_close($link);
 
 ?>
