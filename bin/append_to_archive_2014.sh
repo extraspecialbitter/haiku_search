@@ -2,7 +2,6 @@
 
 # see if there's anything new to process
 
-rsync -lat --delete mena@sasi.pair.com:/usr/www/users/mena/haikupoet/new_haiku/ /home/pablo/git/haiku_search/data/new_haiku/
 if [ -e /home/pablo/git/haiku_search/data/new_haiku/0000.html ]
 
 # if so append it
@@ -19,8 +18,8 @@ then
 # cleanup
 
   rm -rf snippet.txt qwert.txt
-  ssh mena@sasi.pair.com "cat /dev/null > /usr/home/mena/mail/new_haiku"
-  ssh mena@sasi.pair.com "rm -f /usr/www/users/mena/haikupoet/new_haiku/*"
+  cat /dev/null > /home/pablo/mail/new_haiku
+  rm -f /var/www/haikupoet/new_haiku/*
 
 else
 
