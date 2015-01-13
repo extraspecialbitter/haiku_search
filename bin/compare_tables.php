@@ -35,7 +35,7 @@ if (!$link) {
 }
 mysql_select_db('haiku_archive')or die("cannot select db");
 
-$search_query = "SELECT * FROM archive_2014 WHERE haiku_text NOT IN (SELECT haiku_text FROM archive_2014_from_html)";
+$search_query = "SELECT * FROM archive_2015 WHERE haiku_text NOT IN (SELECT haiku_text FROM archive_2015_from_html)";
 
 $result = mysql_query($search_query,$link);
 
@@ -54,7 +54,7 @@ if ($rows == 0) {
         $count = $count + 1;
     }
 
-$search_query = "SELECT * FROM archive_2014_from_html WHERE haiku_text NOT IN (SELECT haiku_text FROM archive_2014)";
+$search_query = "SELECT * FROM archive_2015_from_html WHERE haiku_text NOT IN (SELECT haiku_text FROM archive_2015)";
 
 $result = mysql_query($search_query,$link);
 
