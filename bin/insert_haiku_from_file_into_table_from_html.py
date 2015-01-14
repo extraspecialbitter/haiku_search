@@ -18,7 +18,7 @@ if count != 1:
     print "\n"
     sys.exit(1)    
 
-table_name = "archive_2014_from_html"
+table_name = "archive_2015_from_html"
 
 file_name = sys.argv[1]
 
