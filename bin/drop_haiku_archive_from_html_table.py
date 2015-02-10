@@ -2,7 +2,7 @@
 
 import MySQLdb, sys, time
 
-table_name = "archive_2014_from_html"
+table_name = "archive_2015_from_html"
 
 # Open database connection
 db = MySQLdb.connect("localhost","root","menagerie","haiku_archive" )
