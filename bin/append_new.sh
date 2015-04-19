@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# start out with a sleep to make sure the mailboxes are populated
-
-sleep 60
-
 # first process the year to date
  
 export InFile=/home/pablo/mail/haiku_archive
