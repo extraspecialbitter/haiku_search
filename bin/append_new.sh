@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# prep
+
+rm -f /var/www/haikupoet/new_haiku/*
+
 # first process the year to date
  
 export InFile=/home/pablo/mail/haiku_archive

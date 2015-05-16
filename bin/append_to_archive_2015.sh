@@ -17,9 +17,8 @@ then
 
 # cleanup
 
-  rm -rf snippet.txt qwert.txt
+  rm -f snippet.txt qwert.txt
   cat /dev/null > /home/pablo/mail/new_haiku
-  rm -f /var/www/haikupoet/new_haiku/*
 
 else
 
