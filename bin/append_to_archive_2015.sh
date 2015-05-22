@@ -1,6 +1,16 @@
 #!/bin/bash
 
-# see if there's anything new to process
+# initializations
+
+export InFile=/home/pablo/mail/new_haiku
+export OutFile=/var/www/haikupoet/new_haiku
+export Hype=/usr/bin/hypermail
+
+# process the mail
+
+$Hype -m $InFile -d $OutFile -x
+
+# see if there's anything new to add
 
 if [ -e /var/www/haikupoet/new_haiku/0000.html ]
 
@@ -18,6 +28,7 @@ then
 # cleanup
 
   rm -f snippet.txt qwert.txt
+  rm -f /var/www/haikupoet/new_haiku/*
   cat /dev/null > /home/pablo/mail/new_haiku
 
 else
