@@ -44,6 +44,7 @@ if ($rows == 0) {
     echo "sorry, no match for this query.";
     }
     $count = 0;
+    echo "\n";
     echo "haiku in original archive but not in archive generated from html:";
     echo "\n\n\n";
     while ($count < $rows) {
