@@ -499,6 +499,29 @@ INSERT INTO `archive_2016` VALUES ('New Year&#8217;s day --<br>spent coffee grou
 UNLOCK TABLES;
 
 --
+-- Table structure for table `archive_2017`
+--
+
+DROP TABLE IF EXISTS `archive_2017`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `archive_2017` (
+  `haiku_text` varchar(120) DEFAULT NULL,
+  `date_written` char(22) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `archive_2017`
+--
+
+LOCK TABLES `archive_2017` WRITE;
+/*!40000 ALTER TABLE `archive_2017` DISABLE KEYS */;
+INSERT INTO `archive_2017` VALUES ('Times Square --<br>waiting for the other shoe<br>to drop<br>','<i>1-Jan-2017</i><br>'),('New Year&#8217;s Day --<br>my first resolution<br>fast asleep<br>','<i>1-Jan-2017</i><br>'),('New Year&#8217;s Day --<br>the ice in the backyard<br>still frozen<br>','<i>1-Jan-2017</i><br>'),('burning on the stove<br>my hangover cure<br>','<i>1-Jan-2017</i><br>');
+/*!40000 ALTER TABLE `archive_2017` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `archive_new`
 --
 
@@ -552,4 +575,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-01 10:52:42
+-- Dump completed on 2017-01-01 12:19:24
