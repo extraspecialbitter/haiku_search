@@ -52,7 +52,8 @@ $search_query =    "SELECT haiku_text, date_written FROM archive_1999 WHERE haik
                     SELECT haiku_text, date_written FROM archive_2013 WHERE haiku_text LIKE '%$string%' UNION
                     SELECT haiku_text, date_written FROM archive_2014 WHERE haiku_text LIKE '%$string%' UNION
                     SELECT haiku_text, date_written FROM archive_2015 WHERE haiku_text LIKE '%$string%' UNION
-                    SELECT haiku_text, date_written FROM archive_2016 WHERE haiku_text LIKE '%$string%'";
+                    SELECT haiku_text, date_written FROM archive_2016 WHERE haiku_text LIKE '%$string%' UNION
+                    SELECT haiku_text, date_written FROM archive_2017 WHERE haiku_text LIKE '%$string%'";
 $result = mysql_query($search_query,$link);
 $rows = mysql_num_rows($result);
 if ($rows == 0) {
