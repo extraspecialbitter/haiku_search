@@ -499,6 +499,29 @@ INSERT INTO `archive_2017` VALUES ('Times Square --<br>waiting for the other sho
 UNLOCK TABLES;
 
 --
+-- Table structure for table `archive_2018`
+--
+
+DROP TABLE IF EXISTS `archive_2018`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `archive_2018` (
+  `haiku_text` varchar(120) DEFAULT NULL,
+  `date_written` char(22) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `archive_2018`
+--
+
+LOCK TABLES `archive_2018` WRITE;
+/*!40000 ALTER TABLE `archive_2018` DISABLE KEYS */;
+INSERT INTO `archive_2018` VALUES ('cold moon --<br>a stranger tells me<br>I drink too much<br>','<i>1-Jan-2018</i><br>'),('New Year&#8217;s resolutions<br>a frozen koi pond<br>','<i>1-Jan-2018</i><br>'),('cold sky<br>a towering<br>smokestack<br>','<i>1-Jan-2018</i><br>'),('January morning<br>resolutions<br>jog on by<br>','<i>1-Jan-2018</i><br>'),('New Year&#8217;s brunch:<br>resolutions optional<br>','<i>1-Jan-2018</i><br>'),('frozen river<br>embracing<br>the silence<br>','<i>1-Jan-2018</i><br>'),('stepping away<br>from the fire<br>a cold draft<br>finds me<br>','<i>1-Jan-2018</i><br>'),('wolf moon --<br>the weekend<br>isn&#8217;t over<br>','<i>1-Jan-2018</i><br>'),('Super moon --<br>an imperial stout<br>','<i>1-Jan-2018</i><br>'),('wolf moon<br>I know her eyes<br>are hiding something<br>','<i>1-Jan-2018</i><br>'),('snow in the air --<br>it takes so long<br>to fall<br>','<i>1-Jan-2018</i><br>'),('Super moon<br>we shouldn&#8217;t have<br>stayed out<br>so late<br>','<i>1-Jan-2018</i><br>'),('empty nesters<br>all their eggs<br>in different baskets<br>','<i>2-Jan-2018</i><br>'),('navigating<br>the frozen river<br>a narrow trickle<br>','<i>2-Jan-2018</i><br>'),('meteor shower --<br>things are<br>looking up<br>','<i>2-Jan-2018</i><br>'),('blizzard warning --<br>wishing I hadn&#8217;t seen<br>that black cat<br>','<i>2-Jan-2018</i><br>'),('fourth quarter earnings<br>another blast<br>of arctic air<br>','<i>2-Jan-2018</i><br>'),('a rave review<br>for my acid house<br>mix CD<br>','<i>2-Jan-2018</i><br>'),('the road to hell is riddled with potholes<br>','<i>2-Jan-2018</i><br>'),('resolutions<br>a frozen<br>cranberry bog<br>','<i>2-Jan-2018</i><br>');
+/*!40000 ALTER TABLE `archive_2018` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `archive_new`
 --
 
@@ -552,4 +575,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-01-01 10:42:05
+-- Dump completed on 2018-01-02 17:27:05
