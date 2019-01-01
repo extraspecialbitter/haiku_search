@@ -16,7 +16,7 @@ if count < 1:
     sys.exit(1)
 
 year_string = sys.argv[1]
-if int(year_string) < 1999 or int(year_string) > 2018:
+if int(year_string) < 1999 or int(year_string) > 2019:
     print "\n"
     print "Year must be between 1999 and 2018\n"
     sys.exit(1)
