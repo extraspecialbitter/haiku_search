@@ -10,6 +10,7 @@ import cgi
 
 arguments = sys.argv[1:]
 count = len(arguments)
+search_count = 0
 
 if count != 1:
     print "\n"
@@ -19,7 +20,7 @@ if count != 1:
     sys.exit(1)    
 
 search_string = sys.argv[1]
-print "search_string: %s" % search_string
+# print "search_string: %s" % search_string
 
 # filter MySQL warnings
 filterwarnings('ignore', category = MySQLdb.Warning)
@@ -35,15 +36,19 @@ cursor = db.cursor()
 years = (1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019)
 for year_string in years:
     table_name = "archive_" + str(year_string)
-    print "table_name: %s" % table_name
+#   print "table_name: %s" % table_name
 
 # do the actual query
-    cursor.execute("SELECT COUNT(*) FROM %s WHERE haiku_text LIKE %s"), (table_name, ("%{}%".format(search_string),))
-#   cursor.execute("SELECT COUNT(*) FROM archive_2019 WHERE haiku_text LIKE %s"), ("%{}%".format(search_string),)
+    sql = "SELECT COUNT(*) FROM " + table_name + " WHERE haiku_text LIKE \"%" + search_string + "%\""
+#   print "sql: %s" % sql
+    cursor.execute(sql)
+    result = cursor.fetchone()
+    search_count = search_count + result[0]
 
 # Commit your changes in the database
     db.commit()
 
 # disconnect from server
 db.close()
+print "total count of the string \"%s\": %s"  % (search_string,search_count)
 
