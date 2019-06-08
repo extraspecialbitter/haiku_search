@@ -19,6 +19,7 @@ if count != 1:
     sys.exit(1)    
 
 search_string = sys.argv[1]
+print "search_string: %s" % search_string
 
 # filter MySQL warnings
 filterwarnings('ignore', category = MySQLdb.Warning)
@@ -33,10 +34,12 @@ cursor = db.cursor()
 
 years = (1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019)
 for year_string in years:
-    table_name = "archive_" + year_string
+    table_name = "archive_" + str(year_string)
+    print "table_name: %s" % table_name
 
 # do the actual query
-    cursor.execute("SELECT COUNT(*) FROM %s WHERE haiku_text LIKE %s") % table_name search_string
+    cursor.execute("SELECT COUNT(*) FROM %s WHERE haiku_text LIKE %s"), (table_name, ("%{}%".format(search_string),))
+#   cursor.execute("SELECT COUNT(*) FROM archive_2019 WHERE haiku_text LIKE %s"), ("%{}%".format(search_string),)
 
 # Commit your changes in the database
     db.commit()
