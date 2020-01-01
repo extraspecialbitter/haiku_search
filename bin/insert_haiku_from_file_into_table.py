@@ -19,9 +19,9 @@ if count != 2:
     sys.exit(1)    
 
 year_string = sys.argv[1]
-if int(year_string) < 1999 or int(year_string) > 2019:
+if int(year_string) < 1999 or int(year_string) > 2020:
     print "\n"
-    print "Year must be between 1999 and 2018\n"
+    print "Year must be between 1999 and 2020\n"
     sys.exit(1)    
 
 table_name = "archive_" + year_string
