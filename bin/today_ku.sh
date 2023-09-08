@@ -1,6 +1,7 @@
 #!/bin/bash
 
-day_and_month=`date +%d-%b`
+# day_and_month=`date +%d-%b`
+day_and_month=`date +%_d-%b`
 day_month_and_year=`date +%d-%b-%Y`
 this_year=`date +%Y`
 
