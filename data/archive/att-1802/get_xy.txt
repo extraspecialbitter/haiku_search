@@ -1,0 +1,137 @@
+#!/usr/bin/env python
+
+# This program will hopefully plot all the underway data
+# depending on how it is called.
+# Currently:
+# June 24, 2009: First run taking data from .csv file for starboard
+#                and port GPS sensor...         Walter Cacho
+#                                                     lstolp
+#
+# October 2, 2009: Turned the header into a hash, variable to number
+#                  where number is the column of the data
+#                                                     lstolp
+#
+# January 2010: Ignore case of header, turning everything to lowercase.
+#               If the variable is empty, do not use it. Before, it was making
+#               it zero, but this is for the GMT maps, and if there is no data,
+#               then do not need any.
+#
+# 20190429: Updated for Atlantis to make gmt.xy files in shiptrack, will
+#           turn these into KML files
+
+import os
+from typing import List, Tuple
+
+# Debug = 1
+
+out_file = "gmt.xy"
+output_dir = "/home/data/shiptrack/"
+last_out = os.path.join(output_dir, "last.xy")
+label = os.path.join(output_dir, "gmt.label")
+minmax = "minmax"
+
+print(f"$out_file = {out_file}") if Debug else None
+print(f"$output_dir = {output_dir}") if Debug else None
+
+# Get the ship ID from the CRUISE_ID
+cruise_id = os.popen("cat /home/data/CRUISE_ID").read().strip()
+ship_id = cruise_id[:2]
+head = {}
+
+# Make a list of data files to be read
+csv_file_list = []
+data_dir = "/home/data/underway/proc"
+files = os.listdir(data_dir)
+
+for file in files:
+    if re.match(rf"{ship_id}\d{{6}}_.*\.csv", file, re.IGNORECASE):
+        csv_file_list.append(os.path.join(data_dir, file))
+
+# Extract data from files
+with open(os.path.join(output_dir, out_file), "w") as out:
+    for csv_file in csv_file_list:
+        try:
+            with open(csv_file) as csv_file_handle:
+                print(f"$csv_file = {csv_file}") if Debug else None
+                # Throw away title line
+                next(csv_file_handle)
+
+                # Strip header line of leading/trailing whitespace
+                header_line = next(csv_file_handle).strip()
+
+                # Split headers
+                headers = header_line.split(",")
+
+                # Create a dictionary of the header info to figure out which column it is
+                print(f"@headers = {headers}") if Debug else None
+
+                for row, header in enumerate(headers):
+                    header = header.strip().lower()
+                    head[header] = row
+
+                print(f"$head['dec_lat'] = {head['dec_lat']}") if Debug else None
+
+                # Process CSV data lines
+                for line in csv_file_handle:
+                    data = line.split(",")
+
+                    date, time = map(str.strip, (data[0], data[1]))
+
+                    # Create date/time string
+                    yr, month, day = date.split("/")
+                    year = yr[2:]
+
+                    date_plot = "/".join((month, day, year))
+                    plot_time = "/".join((date_plot, time))
+
+                    # Write data to xy files if GPS data is not missing
+                    if data[head["dec_lon"]] != " " or data[head["dec_lat"]] != " ":
+                        out.write(f"{data[head['dec_lon']]:.4f}, {data[head['dec_lat']]:.4f}, {time}, {date}\n")
+                        lat = float(data[head["dec_lat"]])
+                        lon = float(data[head["dec_lon"]])
+                        now = data[head["date"]]
+
+                        # Get min/max arrays
+                        lat_list.append(lat)
+                        lon_list.append(lon)
+
+        except IOError:
+            print(f"Unable to open file '{csv_file}'. Error message was: {exc_info()[1]}")
+
+# Find the min and max values and write to a file
+lat_list.sort()
+lah = lat_list[-1]
+lal = lat_list[0]
+
+lon_list.sort()
+lol = lon_list[0]
+loh = lon_list[-1]
+
+# Write minmax file
+with open(os.path.join(output_dir, minmax), "w") as minmax_file:
+    minmax_file.write(f"{lal}, {lah}, {lol}, {loh}\n")
+
+# Write last out
+with open(last_out, "w") as last_out_file:
+    last_out_file.write(f"{lon} {lat} {now} {now_t}\n")
+
+# Write LABEL file
+with open(label, "w") as label_file:
+    label_file.write(f"{lon} {lat} 16 0 6 1 {cruise_id}\n")
+
+    if lat < 0:
+        latc = abs(lat)
+        NS = "S"
+    else:
+        latc = lat
+        NS = "N"
+
+    if lon < 0:
+        lonc = abs(lon)
+        EW = "W"
+    else:
+        lonc = lon
+        EW = "E"
+
+    lastmsg = f"Last position: {latc} {NS}, {lonc} {EW} at {now_t} GMT on {now}"
+    label_file.write(f"{lon} {lat} 14 0 4 1 {lastmsg}\n")
