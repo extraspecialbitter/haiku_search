@@ -60,7 +60,8 @@ $search_query =    "SELECT haiku_text, date_written FROM archive_1999 WHERE haik
                     SELECT haiku_text, date_written FROM archive_2021 WHERE haiku_text LIKE '%$string%' UNION
                     SELECT haiku_text, date_written FROM archive_2022 WHERE haiku_text LIKE '%$string%' UNION
                     SELECT haiku_text, date_written FROM archive_2023 WHERE haiku_text LIKE '%$string%' UNION
-                    SELECT haiku_text, date_written FROM archive_2024 WHERE haiku_text LIKE '%$string%'";
+                    SELECT haiku_text, date_written FROM archive_2024 WHERE haiku_text LIKE '%$string%' UNION
+                    SELECT haiku_text, date_written FROM archive_2025 WHERE haiku_text LIKE '%$string%'";
 $result = mysql_query($search_query,$link);
 $rows = mysql_num_rows($result);
 if ($rows == 0) {
