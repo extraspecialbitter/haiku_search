@@ -18,9 +18,18 @@ GROUP BY 1
 
 counts = dict(cur.fetchall())
 
-d = datetime.date(year,1,1)
+start = datetime.date(year,1,1)
 
-while d.year == year:
+# stop at today if it's the current year
+today = datetime.date.today()
+if year == today.year:
+    end = today
+else:
+    end = datetime.date(year,12,31)
+
+d = start
+
+while d <= end:
 
     key = d.strftime("%d-%b").lstrip("0")
 
