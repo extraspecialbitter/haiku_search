@@ -4,7 +4,14 @@ import MySQLdb
 import sys
 import datetime
 
+if len(sys.argv) < 2:
+    raise ValueError("Year is required. Usage: python script.py <year>")
+
 year = int(sys.argv[1])
+
+if year < 1999 or year > 2026:
+    raise ValueError("Year must be between 1999 and 2026.")
+
 table = "archive_{}".format(year)
 
 db = MySQLdb.connect("localhost","root","menagerie","haiku_archive")
