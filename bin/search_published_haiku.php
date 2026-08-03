@@ -35,24 +35,27 @@ if ($stmt === false) {
 
 $stmt->bind_param("s", $search_term);
 $stmt->execute();
-$result = $stmt->get_result();
+$stmt->bind_result($haiku_text, $publication_name, $year, $month, $volume, $issue);
 
-if ($result->num_rows === 0) {
-    echo "No haiku found matching \"" . htmlspecialchars($search_term) . "\".";
-} else {
-    while ($row = $result->fetch_assoc()) {
-        echo "<p>";
-        echo htmlspecialchars($row['haiku_text']) . "<br>";
-        echo htmlspecialchars($row['publication_name']) . "<br>";
+$found_any = false;
 
-        // Only show month/year line if both exist
-        if (!empty($row['month']) && !empty($row['year'])) {
-            echo htmlspecialchars($row['month']) . " " . htmlspecialchars($row['year']) . "<br>";
-        }
+while ($stmt->fetch()) {
+    $found_any = true;
+    echo "<p>";
+    echo htmlspecialchars($haiku_text) . "<br>";
+    echo htmlspecialchars($publication_name) . "<br>";
 
-        echo htmlspecialchars($row['volume']) . " " . htmlspecialchars($row['issue']);
-        echo "</p><hr>";
+    // Only show month/year line if both exist
+    if (!empty($month) && !empty($year)) {
+        echo htmlspecialchars($month) . " " . htmlspecialchars($year) . "<br>";
     }
+
+    echo htmlspecialchars($volume) . " " . htmlspecialchars($issue);
+    echo "</p><hr>";
+}
+
+if (!$found_any) {
+    echo "No haiku found matching \"" . htmlspecialchars($search_term) . "\".";
 }
 
 $stmt->close();
