@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+# Written for Python 2.7
+
+from __future__ import print_function
 
 import csv
 import sys
@@ -29,14 +32,14 @@ insert_sql = """INSERT INTO published_haiku
                  (haiku_index, haiku_text, publication_name, year, month, volume, issue)
                  VALUES (%s, %s, %s, %s, %s, %s, %s)"""
 
-with open(CSV_PATH, newline="", encoding="utf-8") as f:
+with open(CSV_PATH, "rb") as f:
     reader = csv.reader(f)
     header = next(reader, None)  # skip header row; remove this line if your CSV has no header
 
     rows_inserted = 0
     for i, row in enumerate(reader, start=1):
         if len(row) != 6:
-            print(f"Skipping malformed row {i}: {row}", file=sys.stderr)
+            print("Skipping malformed row {0}: {1}".format(i, row), file=sys.stderr)
             continue
 
         haiku_text, publication_name, year, month, volume, issue = row
@@ -44,7 +47,7 @@ with open(CSV_PATH, newline="", encoding="utf-8") as f:
         rows_inserted += 1
 
 db.commit()
-print(f"Inserted {rows_inserted} rows.")
+print("Inserted {0} rows.".format(rows_inserted))
 
 # disconnect from server
 db.close()
