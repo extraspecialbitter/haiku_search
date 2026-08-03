@@ -1,0 +1,60 @@
+<?php
+// Database connection settings — match your Python script's credentials
+$db_host = "localhost";
+$db_user = "root";
+$db_pass = "menagerie";
+$db_name = "haiku_archive";
+
+// Grab the search term from the POST request
+$search_term = isset($_POST['search_term']) ? trim($_POST['search_term']) : '';
+
+if ($search_term === '') {
+    echo "Please enter a search term.";
+    exit;
+}
+
+// Connect to the database
+$mysqli = new mysqli($db_host, $db_user, $db_pass, $db_name);
+
+if ($mysqli->connect_errno) {
+    echo "Database connection failed: " . htmlspecialchars($mysqli->connect_error);
+    exit;
+}
+
+// Use a prepared statement to safely search haiku_text for any partial match
+$sql = "SELECT haiku_text, publication_name, year, month, volume, issue
+        FROM published_haiku
+        WHERE haiku_text LIKE CONCAT('%', ?, '%')
+        ORDER BY haiku_index";
+
+$stmt = $mysqli->prepare($sql);
+if ($stmt === false) {
+    echo "Query preparation failed: " . htmlspecialchars($mysqli->error);
+    exit;
+}
+
+$stmt->bind_param("s", $search_term);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    echo "No haiku found matching \"" . htmlspecialchars($search_term) . "\".";
+} else {
+    while ($row = $result->fetch_assoc()) {
+        echo "<p>";
+        echo htmlspecialchars($row['haiku_text']) . "<br>";
+        echo htmlspecialchars($row['publication_name']) . "<br>";
+
+        // Only show month/year line if both exist
+        if (!empty($row['month']) && !empty($row['year'])) {
+            echo htmlspecialchars($row['month']) . " " . htmlspecialchars($row['year']) . "<br>";
+        }
+
+        echo htmlspecialchars($row['volume']) . " " . htmlspecialchars($row['issue']);
+        echo "</p><hr>";
+    }
+}
+
+$stmt->close();
+$mysqli->close();
+?>
