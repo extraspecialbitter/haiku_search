@@ -20,7 +20,7 @@ create_sql = """CREATE TABLE IF NOT EXISTS published_haiku (
          haiku_text VARCHAR(120),
          publication_name CHAR(22),
          year CHAR(6),
-         month CHAR(6),
+         month VARCHAR(12),
          volume CHAR(12),
          issue CHAR(12))"""
 
