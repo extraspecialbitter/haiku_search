@@ -12,7 +12,7 @@ cursor = db.cursor()
 # Create table using execute() method.
 
 sql = """CREATE TABLE IF NOT EXISTS published_haiku (
-         index INT,
+         haiku_index INT,
          haiku_text VARCHAR(120),
          publication_name CHAR(22),
          year CHAR(6),
