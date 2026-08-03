@@ -6,7 +6,7 @@ $db_pass = "menagerie";
 $db_name = "haiku_archive";
 
 // Grab the search term from the POST request
-$search_term = isset($_POST['search_term']) ? trim($_POST['search_term']) : '';
+$search_term = isset($_POST['keywords']) ? trim($_POST['keywords']) : '';
 
 if ($search_term === '') {
     echo "Please enter a search term.";
