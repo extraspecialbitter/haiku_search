@@ -25,7 +25,7 @@ if ($mysqli->connect_errno) {
 }
 
 // Make sure PHP reads data from MySQL as UTF-8
-$mysqli->set_charset("utf8");
+$mysqli->set_charset("utf-8");
 
 // Use a prepared statement to safely search haiku_text for any partial match
 $sql = "SELECT haiku_text, publication_name, year, month, volume, issue
