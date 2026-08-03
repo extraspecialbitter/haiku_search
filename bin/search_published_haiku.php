@@ -1,4 +1,7 @@
 <?php
+// Ensure output is interpreted as UTF-8 by the browser
+header('Content-Type: text/html; charset=utf-8');
+
 // Database connection settings — match your Python script's credentials
 $db_host = "localhost";
 $db_user = "root";
@@ -20,6 +23,9 @@ if ($mysqli->connect_errno) {
     echo "Database connection failed: " . htmlspecialchars($mysqli->connect_error);
     exit;
 }
+
+// Make sure PHP reads data from MySQL as UTF-8
+$mysqli->set_charset("utf8");
 
 // Use a prepared statement to safely search haiku_text for any partial match
 $sql = "SELECT haiku_text, publication_name, year, month, volume, issue
