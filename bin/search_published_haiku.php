@@ -71,7 +71,14 @@ while ($stmt->fetch()) {
         }
     }
 
-    echo "Volume: " . htmlspecialchars($volume) . " " . "Issue: " . htmlspecialchars($issue);
+    $volume_issue_parts = array();
+    if (!empty($volume)) {
+        $volume_issue_parts[] = "Volume: " . htmlspecialchars($volume);
+    }
+    if (!empty($issue)) {
+        $volume_issue_parts[] = "Issue: " . htmlspecialchars($issue);
+    }
+    echo implode(" ", $volume_issue_parts);
     echo "</p><hr>";
 }
 
