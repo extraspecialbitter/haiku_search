@@ -61,12 +61,17 @@ while ($stmt->fetch()) {
     echo $safe_haiku_text . "<br><br>";
     echo htmlspecialchars($publication_name) . "<br>";
 
-    // Only show month/year line if both exist
-    if (!empty($month) && !empty($year)) {
-        echo htmlspecialchars($month) . " " . htmlspecialchars($year) . "<br>";
+    // Show the year whenever it exists; include the month alongside it
+    // only when the month is also present.
+    if (!empty($year)) {
+        if (!empty($month)) {
+            echo htmlspecialchars($month) . " " . htmlspecialchars($year) . "<br>";
+        } else {
+            echo htmlspecialchars($year) . "<br>";
+        }
     }
 
-    echo htmlspecialchars($volume) . " " . htmlspecialchars($issue);
+    echo "Volume: " . htmlspecialchars($volume) . " " . "Issue: " . htmlspecialchars($issue);
     echo "</p><hr>";
 }
 
