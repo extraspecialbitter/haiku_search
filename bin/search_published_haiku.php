@@ -58,7 +58,7 @@ while ($stmt->fetch()) {
     );
 
     echo "<p>";
-    echo $safe_haiku_text . "<br>";
+    echo $safe_haiku_text . "<br><br>";
     echo htmlspecialchars($publication_name) . "<br>";
 
     // Only show month/year line if both exist
