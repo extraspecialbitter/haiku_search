@@ -47,8 +47,18 @@ $found_any = false;
 
 while ($stmt->fetch()) {
     $found_any = true;
+
+    // Escape the haiku text for safety, then restore the intended <br> line
+    // breaks (stored as literal "<br>" markers by the import script) so they
+    // render as actual HTML line breaks instead of literal text.
+    $safe_haiku_text = str_replace(
+        htmlspecialchars('<br>'),
+        '<br>',
+        htmlspecialchars($haiku_text)
+    );
+
     echo "<p>";
-    echo htmlspecialchars($haiku_text) . "<br>";
+    echo $safe_haiku_text . "<br>";
     echo htmlspecialchars($publication_name) . "<br>";
 
     // Only show month/year line if both exist
