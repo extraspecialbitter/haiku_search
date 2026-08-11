@@ -13,9 +13,12 @@ CSV_PATH = "published_haiku.csv"  # update to your actual CSV file path
 db = MySQLdb.connect("localhost", "root", "menagerie", "haiku_archive")
 cursor = db.cursor()
 
-# Create table if it doesn't exist yet
+# Always start fresh: drop the table if it exists, then recreate it
+drop_sql = "DROP TABLE IF EXISTS published_haiku"
+cursor.execute(drop_sql)
+
 # Note: renamed "index" -> "haiku_index" since INDEX is a reserved word in MySQL
-create_sql = """CREATE TABLE IF NOT EXISTS published_haiku (
+create_sql = """CREATE TABLE published_haiku (
          haiku_index INT,
          haiku_text VARCHAR(120),
          publication_name CHAR(22),
@@ -43,6 +46,7 @@ with open(CSV_PATH, "rb") as f:
             continue
 
         haiku_text, publication_name, year, month, volume, issue = row
+        haiku_text = haiku_text.replace("/", "<br>")
         cursor.execute(insert_sql, (i, haiku_text, publication_name, year, month, volume, issue))
         rows_inserted += 1
 
