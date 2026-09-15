@@ -13,6 +13,14 @@ CSV_PATH = "published_haiku.csv"  # update to your actual CSV file path
 db = MySQLdb.connect("localhost", "root", "menagerie", "haiku_archive")
 cursor = db.cursor()
 
+# Count the rows already in the table (if it exists) before dropping it
+cursor.execute("SHOW TABLES LIKE 'published_haiku'")
+if cursor.fetchone() is None:
+    previous_row_count = None  # table did not exist yet
+else:
+    cursor.execute("SELECT COUNT(*) FROM published_haiku")
+    previous_row_count = cursor.fetchone()[0]
+
 # Always start fresh: drop the table if it exists, then recreate it
 drop_sql = "DROP TABLE IF EXISTS published_haiku"
 cursor.execute(drop_sql)
@@ -51,6 +59,12 @@ with open(CSV_PATH, "rb") as f:
         rows_inserted += 1
 
 db.commit()
+
+if previous_row_count is None:
+    print("No existing published_haiku table found; created a new one.")
+else:
+    print("Dropped existing table containing {0} rows.".format(previous_row_count))
+
 print("Inserted {0} rows.".format(rows_inserted))
 
 # disconnect from server
