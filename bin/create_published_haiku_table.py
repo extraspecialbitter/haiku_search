@@ -29,7 +29,7 @@ cursor.execute(drop_sql)
 create_sql = """CREATE TABLE published_haiku (
          haiku_index INT,
          haiku_text VARCHAR(120),
-         publication_name CHAR(22),
+         publication_name CHAR(24),
          year CHAR(6),
          month VARCHAR(12),
          volume CHAR(12),
